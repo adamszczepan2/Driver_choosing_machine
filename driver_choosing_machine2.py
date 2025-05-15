@@ -91,7 +91,7 @@ def del_menu():
     # Funkcja wyswietlająca menu usuwania kierowców oraz zwracająca wybór użytkownika
     del_menu = f"{'Menu usuwania kierowców:':-^121}\n\n1. Naciśnij 1 aby wyświetlić obecnych kierowców.\n\n\
 2. Naciśnij 2 aby usunąć wskazanych kierowców.\n\n3. Naciśnij 3 aby usunąć wszystkich kierowców z bazy.\n\n\
-4. Naciśnij 0 aby wyjść do menu gównego.\n\n{'-'*121}\n"
+4. Naciśnij 0 aby wyjść do Menu gównego.\n\n{'-'*121}\n"
     print(del_menu)
     choice = input("Dokonaj wyboru: ")
     print()
@@ -101,7 +101,7 @@ def del_menu():
     return(int(choice))
 
 def delete_drivers(drivers):
-    # Funkcja wyswietlająca usuwająca kierowców z bazy oraz zwracająca efekt działań do bazy kierowców
+    # Funkcja wyswietlająca menu i usuwająca kierowców z bazy oraz zwracająca efekt działań do bazy kierowców
     del_choice = del_menu()
     while del_choice:
         match del_choice:
@@ -130,7 +130,7 @@ def delete_drivers(drivers):
                 time.sleep(1)
                 drivers = []
                 current_drivers(drivers)
-                print(f"Automatyczne wyjście z menu usuwania kierowców do menu głównego...\n")
+                print(f"Automatyczne wyjście z Menu usuwania kierowców do Menu głównego...\n")
                 time.sleep(1)
                 del_choice = 0
     
