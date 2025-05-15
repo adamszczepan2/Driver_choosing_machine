@@ -56,18 +56,23 @@ def current_drivers(drivers):
     time.sleep(1)
     globals()['drivers'] = drivers
 
-def add_new_drivers(drivers):
-    # Funkcja dodająca nowych kierowców do bazy. 
-    drivers = drivers
-    new_drivers = []
-    new_drivers = input("Wprowadź imiona rozdzielone spacją: ").title().split(" ") 
+def drivers_input():
+    # Funkcja pomocnicza, wprowadza a następnie przeprowadza walidację wprowadzonych rekordów
+    input_drivers, to_delete = [], []
+    input_drivers = input("Wprowadź imiona rozdzielone spacją: ").title().split(" ") 
     print()
-    for new_driver in new_drivers:
-        new_driver.strip()
-        try:
-            new_drivers.remove('')
-        except ValueError:
-            pass
+    for input_driver in input_drivers:
+        input_driver.strip()
+        if len(input_driver) == 0:
+            to_delete.append(input_driver)
+    for driver_to_del in to_delete:
+        if driver_to_del in input_drivers:
+            input_drivers.remove(driver_to_del)
+    return input_drivers
+
+def add_new_drivers(drivers):
+    # Funkcja dodająca nowych kierowców do bazy.
+    new_drivers = drivers_input() 
     for driver in drivers:
         if driver in new_drivers:
             print(f"{driver} znajduje się już w bazie kierowców.\n")
@@ -97,28 +102,19 @@ def del_menu():
 
 def delete_drivers(drivers):
     # Funkcja wyswietlająca usuwająca kierowców z bazy oraz zwracająca efekt działań do bazy kierowców
-    drivers = drivers
     del_choice = del_menu()
     while del_choice:
         match del_choice:
             case 0:
                 globals()['menu_choice'] = menu()
             case 1:
-                current_drivers(drivers)               
-                del_choice = del_menu()
+                current_drivers(drivers)
+                del_choice = del_menu()               
             case 2:
-                del_drivers = input("Wprowadź imiona kierowców do usunięcia rozdzielone spacją: ").title().split(" ")
+                del_drivers = drivers_input()
                 print() 
                 for del_driver in del_drivers:
-                    del_driver.strip()
-                    try:
-                        del_drivers.remove('')
-                    except ValueError:
-                        pass
-                for del_driver in del_drivers:
                     if del_driver in drivers:
-                        print(f"Usuwam kierowcę {del_driver}.\n")
-                        time.sleep(1)
                         drivers.remove(del_driver)
                     else:
                         print(f"Nie znaleziono kierowcy {del_driver} w bazie kierowców.\n")
@@ -134,6 +130,8 @@ def delete_drivers(drivers):
                 time.sleep(1)
                 drivers = []
                 current_drivers(drivers)
+                print(f"Automatyczne wyjście z menu usuwania kierowców do menu głównego...\n")
+                time.sleep(1)
                 del_choice = 0
     
 def shuffle_drivers(drivers):
@@ -163,7 +161,6 @@ def choose_driver(drivers):
 # dodać usuwanie znaków specjalnych z imion
 # dodać sprawdzenie, czy imiona są wprowadzone kilkukrotnie i jeśli tak, usunięcie duplikatów
 # dodać ograniczenie długości imion do 15 znaków
-# zmienić iterację w add_new i del_drivers tak aby nie usuwać iterowanych elementów
 
 intro()    
 drivers = []
