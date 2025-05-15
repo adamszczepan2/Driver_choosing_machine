@@ -7,7 +7,7 @@ losowania.
 
 Opis działania programu: 
 
-Program wyświetla menu główne, z którego można wybrać opcje- wyświetlenie, dodanie, usunięcie, zmianę kolejności, losowanie kierowców,
+Po uruchomieniu program wyświetla menu główne, z którego można wybrać opcje- wyświetlenie, dodanie, usunięcie, zmianę kolejności, losowanie kierowców,
 lub wyjście z programu. 
 
 Opcja 1
